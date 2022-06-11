@@ -390,10 +390,10 @@ class CostToGo(torch.nn.Module):
     r"""
         Compute total cost incurred along controlled state evolutions
 
-        Saves a :class:`Propagator` and a list of cost functions $(k_0, \dots, k_T)$ of equal
+        Saves a :class:`Propagator` and a list of cost functions $(K_0, \dots, K_T)$ of equal
         lengths.
         As a callable, implements the map
-        $$k^{F, A}\colon (s_0, (\xi_t)_{t=1}^{T+1})) \mapsto \sum_{t=0}^T k_t(s_t, A_t(s_t))$$
+        $$K^{F, A}\colon (s_0, (\xi_t)_{t=1}^{T+1})) \mapsto \sum_{t=0}^T K_t(s_t, A_t(s_t))$$
         where $(A_0,\dots, A_T)$ are the control functions saved by the :class:`Popagator`
         and $(s_t)_{t=0}^T$ is the state evolution as computed by the :class:`Propagator`.
     """
@@ -572,7 +572,7 @@ class CostToGo(torch.nn.Module):
     @property
     def cost_functions(self) -> MutableSequence[Optional[Any]]:
         r"""
-            The mutable, zero-based sequence of cost functions $(k_0,\dots, k_T)$.
+            The mutable, zero-based sequence of cost functions $(K_0,\dots, K_T)$.
 
             To manipulate cost functions, access the contents of this sequence.
             Immutable as a property in the sense that any attempts to replace the sequence
@@ -594,10 +594,10 @@ class CostToGo(torch.nn.Module):
             Return a sub-:class:`CostToGo` of ``self``
 
             If ``self`` has the state functions $F=(F_0,\dots, F_T)$, the control functions
-            $A=(A_0,\dots, A_T)$ and the cost functions $k=(k_0,\dots, k_T)$ and ``key`` specifies 
+            $A=(A_0,\dots, A_T)$ and the cost functions $k=(K_0,\dots, K_T)$ and ``key`` specifies 
             the subset $I=\{t_0,\dots, t_k\}$ of $\{0, \dots, T\}$,
             then return the :class:`CostToGo` given by state the functions $(F_{t_0},\dots, F_{t_k})$,
-            the control functions $(A_{t_0}, \dots, A_{t_k})$ and the cost functions $(k_{t_0},\dots, k_{t_k})$.
+            the control functions $(A_{t_0}, \dots, A_{t_k})$ and the cost functions $(K_{t_0},\dots, K_{t_k})$.
 
             Parameters
             ----------
@@ -642,7 +642,7 @@ class CostToGo(torch.nn.Module):
             The length of ``self`` as a :class:`CostToGo`
 
             If ``self`` has the state functions $F=(F_0,\dots, F_T)$, the control functions
-            $A=(A_0,\dots, A_T)$ and the cost functions $k=(k_0,\dots, k_T)$, then the length of ``self`` is $T+1$.
+            $A=(A_0,\dots, A_T)$ and the cost functions $k=(K_0,\dots, K_T)$, then the length of ``self`` is $T+1$.
 
             Returns
             -------
@@ -657,7 +657,7 @@ class CostToGo(torch.nn.Module):
             The number of steps of ``self`` as a cost-to-go
 
             If ``self`` has the state functions $F=(F_0,\dots, F_T)$, the control functions
-            $A=(A_0,\dots, A_T)$ and the cost functions $k=(k_0,\dots, k_T)$, then the number of steps of ``self`` is $T$.
+            $A=(A_0,\dots, A_T)$ and the cost functions $k=(K_0,\dots, K_T)$, then the number of steps of ``self`` is $T$.
 
             Returns
             -------
@@ -671,8 +671,8 @@ class CostToGo(torch.nn.Module):
             Add, i.e. concatenate, two :class:`CostToGo` objects.
             
             If ``self`` has the state functions $F=(F_0,\dots, F_T)$, the control functions
-            $A=(A_0,\dots, A_T)$ and the cost functions $k=(k_0,\dots, k_T)$ and ``other`` is as well a :class:`CostToGo` with the state functions $G=(G_0,\dots, G_S)$, the control functions
-            $B=(B_0,\dots, B_S)$ and the cost functions $l=(l_0,\dots,l_S)$, then return the concatenated $(T+S)$-step :class:`CostToGo` given by the state functions $(F_0, \dots, F_T, G_0, \dots, G_S)$, the control functions $(A_0,\dots, A_T, B_0,\dots, B_S)$ and the  cost functions $(k_0,\dots, k_T, l_0,\dots, l_S)$.
+            $A=(A_0,\dots, A_T)$ and the cost functions $k=(K_0,\dots, K_T)$ and ``other`` is as well a :class:`CostToGo` with the state functions $G=(G_0,\dots, G_S)$, the control functions
+            $B=(B_0,\dots, B_S)$ and the cost functions $L=(L_0,\dots,L_S)$, then return the concatenated $(T+S)$-step :class:`CostToGo` given by the state functions $(F_0, \dots, F_T, G_0, \dots, G_S)$, the control functions $(A_0,\dots, A_T, B_0,\dots, B_S)$ and the  cost functions $(K_0,\dots, K_T, L_0,\dots, L_S)$.
             
             Parameters
             ----------
