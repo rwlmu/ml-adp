@@ -12,7 +12,7 @@ Guide
 
 Suppose you have an *optimal control problem* at hand which means that: 
 
-* you found a rule to identify a sequence of subsequent, prospective real-life situations with a sequence of real number vectors $s_0,\dots, s_T$ that, depending on some circumstances $a_0,\dots, a_T$ that you control and some unforeseeable future circumstances $\xi_1,\dots, \xi_T$ (both, again, identified in a pre-defined way with sequences of real number vectors), play out in a mathematically determined way: For a range of *state functions* $F_0,\dots, F_{T-1}$ have $$s_{t+1} = F_t(s_t, a_t, \xi_{t+1}), \quad t=0,\dots, T-1$$
+* you found a rule to identify a sequence of subsequent, future real-life situations with a sequence of real number vectors $s_0,\dots, s_T$ that, depending on some circumstances $a_0,\dots, a_T$ that you control and some unforeseeable future circumstances $\xi_1,\dots, \xi_T$ (both, again, identified in a pre-defined way with sequences of real number vectors), play out in a mathematically determined way: For a range of *state functions* $F_0,\dots, F_{T-1}$ have $$s_{t+1} = F_t(s_t, a_t, \xi_{t+1}), \quad t=0,\dots, T-1$$
 
 * you are able - when time $t$ will have come and $s_t$ and $a_t$ will be known - to put a cost $K_t(s_t, a_t)$ on the present scenario using a range of *cost functions* $K_0,\dots, K_T$ such that, in retrospect, the total advantageousness of how the problem turned out for you is captured by the *total cost* $$K^{F,a}(s_0,\xi_1,\dots, \xi_T) = \sum_{t=0}^T K_t(s_t, a_t)$$
 
@@ -62,7 +62,7 @@ Create an empty :class:`ml_adp.cost.CostToGo` of appropriate length and inspect 
     >>> cost_to_go = CostToGo.from_steps(number_of_steps)
     >>> cost_to_go
     CostToGo(
-     step |       state_func       |      control_func      |       cost_func        
+     time |       state_func       |      control_func      |       cost_func        
     ================================================================================
        0                                     None                     None          
        1            None                     None                     None          
